@@ -7,9 +7,21 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 
 / {
+    behaviors {
+        scroll_up_down: scroll_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "SCROLL_UP_DOWN";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+
+            tap-ms = <20>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -29,7 +41,7 @@
                            &kp LEFT_GUI  &kp LEFT_ALT  &kp SPACE  &kp TAB      &kp RET  &kp BACKSPACE  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
             >;
 
-            sensor-bindings = <&inc_dec_kp C_AC_SCROLL_UP C_AC_SCROLL_DOWN>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
         utils {
